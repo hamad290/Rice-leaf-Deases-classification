@@ -7,5 +7,5 @@ web app main file code name are app.py
 if you wnat to run this code just open app.py file are run it
 ![image](https://github.com/hamad290/Rice-leaf-Deases-classification/assets/100110573/daaa7878-5bb1-48b1-b142-0537bc0b4607)
 copy url and past it in chrome.
-![Uploading image.png…]()
 
+![s](https://github.com/hamad290/Rice-leaf-Deases-classification/assets/100110573/9aa91b81-0147-42a7-b6da-b7e732e6829d)
