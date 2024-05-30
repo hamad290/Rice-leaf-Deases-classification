@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chloroscan</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="chechbtn">
+      <li class="fas fa-bars"></li>
+    </label>
+   
+    <label>
+        <img class="logo" src="static/img/logo11.png" alt="Check Leaf Logo">
+      </label>
+   
+     <ul>
+      <li><a class="active" href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('mricheck') }}">Leaf Scan</a></li>
+     <!--<li><a href="{{ url_for('cameracheck') }}">Camera check</a></li>-->
+      <li><a href="{{ url_for('about') }}">About</a></li>
+      
+     </ul>     
+  </nav>
+
+  <div class="main-body">
+    <section class="home">
+      <div class="home-content">
+        <div class="home-content-box">
+          <h3 >Rice Leaf Classification System</h3>
+          <p>Rice leaf diseases pose significant threats to crop yields worldwide, affecting agricultural economies and food security. Timely detection and management are essential to mitigate losses and ensure sustainable rice production.
+
+            This project delves into the realm of machine learning (ML) and deep learning (DL) algorithms to pioneer a solution for the early detection of rice leaf diseases. By leveraging cutting-edge technology, we aim to empower farmers with the tools needed to identify and address potential threats to their crops proactively.
+            
+            Just as early detection is paramount in combating Rice disease, timely intervention is crucial in safeguarding rice crops against the devastating effects of leaf diseases. Through the analysis of leaf images, environmental data, and historical disease patterns, our project endeavors to develop a predictive model capable of accurately identifying various rice leaf diseases.
+            
+            By harnessing the power of data-driven insights, this initiative holds the promise of revolutionizing rice crop management practices. Farmers can anticipate and respond to disease outbreaks swiftly, minimizing crop losses and optimizing yields. Moreover, this research contributes to a deeper understanding of rice plant pathology, paving the way for innovative strategies to enhance agricultural sustainability and resilience. Detecting rice leaf diseases early is crucial for crop health and yield optimization. Our project employs advanced machine learning (ML) and deep learning (DL) algorithms to revolutionize rice crop management. By analyzing leaf images and environmental data, we aim to develop a predictive model for swift disease identification. Early detection empowers farmers to take proactive measures, minimizing crop losses and ensuring food security. Our initiative contributes to a deeper understanding of rice plant pathology, enhancing agricultural sustainability. Join us in harnessing technology to protect vital food sources and empower farming communities. Together, we can revolutionize rice crop management and secure global food supplies.</div>
+        
+          </div>
+    </section>
+  </div>
+ 
+  <footer>
+    <p style=" color :white ">Copyright &copy; 2024 ChloroScan. All rights reserved.</p>
+  </footer>
+</body>
+</html>

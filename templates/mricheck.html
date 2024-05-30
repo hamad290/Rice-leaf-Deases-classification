@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chloroscan</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-image: url("/static/img/bg.jpg");
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .image-preview {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .image-preview img {
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    .image-upload {
+      background-color: #0069d9;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .predict-button {
+      margin-top: 20px;
+      background-color: #0069d9;
+      color: white;
+      border: none;
+      padding: 11px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 3px;
+    }
+
+    .centerbody {
+      margin-top: 50px;
+      height: 555px;
+      width: 600px;
+      max-width: 600px;
+    }
+
+    .error-message {
+      color: black;
+      margin-top: 10px;
+      font-size: large;
+    }
+  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="chechbtn">
+      <li class="fas fa-bars"></li>
+    </label>
+    <label>
+      <img class="logo" src="static/img/logo11.png" alt="Check Leaf Logo">
+    </label>
+    <ul>
+      <li><a class="active" href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('mricheck') }}">Leaf Scan</a></li>
+      <li><a href="{{ url_for('about') }}">About</a></li>
+    </ul>
+  </nav>
+  <center>
+    <div class="centerbody">
+      <h1>Scan By Leaf Image</h1>
+
+      <form id="upload-file" method="post" enctype="multipart/form-data">
+        <input class="image-upload" type="file" name="file" id="imageUpload" accept=".png, .jpg, .jpeg">
+      </form>
+
+      <div class="image-section" style="display:none;">
+        <div class="image-preview" id="imagePreview"></div>
+        <div>
+          <button type="button" class="predict-button" id="btn-predict">Predict</button>
+        </div>
+      </div>
+
+      <div class="loader" style="display:none;"></div>
+      <div id="result"></div>
+      <div class="error-message" id="error-message"></div>
+    </div>
+  </center>
+
+  <footer>
+    <p style="color: white"> Copyright &copy; 2024 Chloroscan. All rights reserved.</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Init
+      $('.image-section').hide();
+      $('.loader').hide();
+      $('#result').hide();
+      $('#error-message').hide();
+
+      function readURL(input) {
+        if (input.files && input.files[0]) {
+          var reader = new FileReader();
+          reader.onload = function (e) {
+            $('#imagePreview').html('<img src="' + e.target.result + '" alt="Image Preview">');
+          }
+          reader.readAsDataURL(input.files[0]);
+        }
+      }
+
+      $("#imageUpload").change(function () {
+        $('.image-section').show();
+        $('#btn-predict').show();
+        $('#result').text('');
+        $('#result').hide();
+        $('#error-message').hide();
+        readURL(this);
+      });
+
+      // Predict
+      $('#btn-predict').click(function () {
+        var form_data = new FormData($('#upload-file')[0]);
+
+        // Show loading animation
+        $(this).hide();
+        $('.loader').show();
+        $('#error-message').hide();
+
+        // Make prediction by calling api /predict
+        $.ajax({
+          type: 'POST',
+          url: '/predict',
+          data: form_data,
+          contentType: false,
+          cache: false,
+          processData: false,
+          async: true,
+          success: function (data) {
+            // Get and display the result
+            $('.loader').hide();
+            $('#result').fadeIn(600);
+            $('#result').html('<h1>Result: ' + data.class_name + '</h1> <p>' + data.percentage + '% chances are there the image is ' + data.class_name + '</p>');
+            console.log('Success!');
+          },
+          error: function (xhr, status, error) {
+            // Show error message
+            $('.loader').hide();
+            $('#btn-predict').show();
+            $('#error-message').text('Please Upload Only Rice Lead Image').show();
+            console.log('Error:', error);
+          },
+          dataType: 'json',
+        });
+      });
+    });
+  </script>
+</body>
+</html>

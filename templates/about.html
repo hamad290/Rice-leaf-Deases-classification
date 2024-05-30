@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chloroscan</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <nav>
+    <input type="checkbox" id="check">
+    <label for="check" class="chechbtn">
+      <li class="fas fa-bars"></li>
+    </label>
+    <label>
+      <img class="logo" src="static/img/logo11.png" alt="Check Leaf Logo">
+    </label>
+     <ul>
+      <li><a class="active" href="{{ url_for('index') }}">Home</a></li>
+      <li><a href="{{ url_for('mricheck') }}">Leaf Scan</a></li>
+    <!-- <li><a href="{{ url_for('cameracheck') }}">Camera check</a></li>-->
+      <li><a href="{{ url_for('about') }}">About</a></li>
+      
+     </ul>     
+  </nav>
+  <div class="main-body-about">
+    <section class="home-about">
+      <div class="home-content-about">
+        <div class="home-content-box-about">
+          <h3 >About</h3>
+          <p>This platform is for RESEARCH USE ONLY, and there is no guarantee that the produced interpretations are accurate. Hence the interpretations should NOT be used for agricultural or clinical use. Any images you upload must be completely free of personal or sensitive information. Additionally, the platform operates as is, may sometimes be subject to unavailability, and thus cannot induce or create reliance of others on this platform for rice leaf diseases detection.</p>
+        </div>
+        </div>
+      
+    </section>
+  </div>
+ 
+  <footer>
+    <p style=" color :white ">Copyright &copy; 2024 Chloroscan. All rights reserved.</p>
+  </footer>
+</body>
+</html>
